@@ -150,7 +150,7 @@ export default function Index() {
                 {[
                   { value: "500+", label: "Товаров" },
                   { value: "8:00", label: "Открытие" },
-                  { value: "22:00", label: "Закрытие" },
+                  { value: "23:00", label: "Закрытие" },
                   { value: "7/7", label: "Дней в неделю" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
@@ -234,7 +234,7 @@ export default function Index() {
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2" />
                 <div className="relative">
                   <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">Ждём вас каждый день!</h2>
-                  <p className="text-white/80 text-lg mb-8">мкр. Птицефабрика, 10А · г. Якутск · 8:00–22:00</p>
+                  <p className="text-white/80 text-lg mb-8">мкр. Птицефабрика, 10А · г. Якутск · 8:00–23:00</p>
                   <button
                     onClick={() => navigate("contacts")}
                     className="bg-white text-[#FF6B1A] font-bold px-8 py-3.5 rounded-2xl hover:bg-white/90 transition-all hover:scale-105 shadow-xl"
@@ -394,7 +394,7 @@ export default function Index() {
               <div className="space-y-5">
                 {[
                   { icon: "MapPin", title: "Адрес", lines: ["мкр. Птицефабрика, 10А", "г. Якутск, Республика Саха (Якутия)"] },
-                  { icon: "Clock", title: "Режим работы", lines: ["Ежедневно: 8:00 — 22:00", "Без выходных и праздников"] },
+                  { icon: "Clock", title: "Режим работы", lines: ["Ежедневно: 8:00 — 23:00", "Без выходных и праздников"] },
                   { icon: "Phone", title: "Телефон", lines: ["Уточнить по телефону"] },
                 ].map((item, i) => (
                   <div key={i} className="glass-card rounded-2xl p-6 flex gap-5 card-hover">
@@ -443,7 +443,7 @@ export default function Index() {
             <div className="w-7 h-7 gradient-bg rounded-lg flex items-center justify-center font-display font-bold text-white text-sm">Н</div>
             <span className="font-display font-bold gradient-text">НАР</span>
           </div>
-          <p className="text-white/30 text-sm text-center">мкр. Птицефабрика, 10А · Якутск · 8:00–22:00</p>
+          <p className="text-white/30 text-sm text-center">мкр. Птицефабрика, 10А · Якутск · 8:00–23:00</p>
           <p className="text-white/20 text-xs">© 2025 Магазин «Нар»</p>
         </div>
       </footer>
