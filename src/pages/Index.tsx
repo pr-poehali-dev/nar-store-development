@@ -1,36 +1,20 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const CATEGORIES = ["Все", "Молочные", "Мясо и рыба", "Фрукты и овощи", "Напитки", "Хлеб и выпечка", "Бакалея", "Заморозка"];
-
 const PRODUCTS = [
   { id: 1, name: "Молоко 3.2%", category: "Молочные", price: "89 ₽", emoji: "🥛", badge: "Хит" },
   { id: 2, name: "Куриное филе", category: "Мясо и рыба", price: "320 ₽", emoji: "🍗", badge: "Свежее" },
-  { id: 3, name: "Гранат", category: "Фрукты и овощи", price: "159 ₽", emoji: "🍎", badge: "" },
   { id: 4, name: "Сок апельсиновый", category: "Напитки", price: "115 ₽", emoji: "🍊", badge: "Акция" },
   { id: 5, name: "Хлеб бородинский", category: "Хлеб и выпечка", price: "65 ₽", emoji: "🍞", badge: "Хит" },
-  { id: 6, name: "Макароны", category: "Бакалея", price: "79 ₽", emoji: "🍝", badge: "" },
-  { id: 7, name: "Сыр Российский", category: "Молочные", price: "245 ₽", emoji: "🧀", badge: "" },
-  { id: 8, name: "Семга слабосолёная", category: "Мясо и рыба", price: "480 ₽", emoji: "🐟", badge: "Свежее" },
-  { id: 9, name: "Томаты", category: "Фрукты и овощи", price: "189 ₽", emoji: "🍅", badge: "" },
-  { id: 10, name: "Вода питьевая 5л", category: "Напитки", price: "95 ₽", emoji: "💧", badge: "" },
   { id: 11, name: "Пельмени домашние", category: "Заморозка", price: "310 ₽", emoji: "🥟", badge: "Хит" },
   { id: 12, name: "Гречка", category: "Бакалея", price: "89 ₽", emoji: "🌾", badge: "Акция" },
 ];
 
-type Section = "home" | "catalog" | "about" | "contacts";
+type Section = "home" | "about" | "contacts";
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState<Section>("home");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Все");
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const filteredProducts = PRODUCTS.filter((p) => {
-    const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchCategory = activeCategory === "Все" || p.category === activeCategory;
-    return matchSearch && matchCategory;
-  });
 
   const navigate = (section: Section) => {
     setActiveSection(section);
@@ -51,7 +35,7 @@ export default function Index() {
           </button>
 
           <div className="hidden md:flex items-center gap-8">
-            {(["home", "catalog", "about", "contacts"] as Section[]).map((s) => (
+            {(["home", "about", "contacts"] as Section[]).map((s) => (
               <button
                 key={s}
                 onClick={() => navigate(s)}
@@ -59,7 +43,7 @@ export default function Index() {
                   activeSection === s ? "text-[#FF6B1A] active" : "text-white/70 hover:text-white"
                 }`}
               >
-                {s === "home" ? "Главная" : s === "catalog" ? "Каталог" : s === "about" ? "О нас" : "Контакты"}
+                {s === "home" ? "Главная" : s === "about" ? "О нас" : "Контакты"}
               </button>
             ))}
           </div>
@@ -71,7 +55,7 @@ export default function Index() {
 
         {menuOpen && (
           <div className="md:hidden bg-[#1A1108] border-t border-[#FF6B1A]/10 px-4 py-4 flex flex-col gap-4 animate-fade-in-up">
-            {(["home", "catalog", "about", "contacts"] as Section[]).map((s) => (
+            {(["home", "about", "contacts"] as Section[]).map((s) => (
               <button
                 key={s}
                 onClick={() => navigate(s)}
@@ -79,7 +63,7 @@ export default function Index() {
                   activeSection === s ? "text-[#FF6B1A]" : "text-white/70"
                 }`}
               >
-                {s === "home" ? "Главная" : s === "catalog" ? "Каталог" : s === "about" ? "О нас" : "Контакты"}
+                {s === "home" ? "Главная" : s === "about" ? "О нас" : "Контакты"}
               </button>
             ))}
           </div>
@@ -124,10 +108,10 @@ export default function Index() {
 
                 <div className="flex flex-wrap gap-4 animate-fade-in-up delay-300">
                   <button
-                    onClick={() => navigate("catalog")}
+                    onClick={() => navigate("about")}
                     className="gradient-bg text-white font-semibold px-8 py-3.5 rounded-2xl hover:opacity-90 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-[#FF6B1A]/30"
                   >
-                    Смотреть каталог
+                    О магазине
                   </button>
                   <button
                     onClick={() => navigate("contacts")}
@@ -157,49 +141,6 @@ export default function Index() {
                     <div className="font-display text-4xl font-bold shimmer-text mb-2">{stat.value}</div>
                     <div className="text-white/50 text-sm uppercase tracking-widest">{stat.label}</div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="py-20">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-              <div className="flex items-end justify-between mb-12">
-                <div>
-                  <p className="text-[#FF6B1A] text-sm uppercase tracking-widest font-medium mb-2">Ассортимент</p>
-                  <h2 className="font-display text-4xl font-bold">Категории товаров</h2>
-                </div>
-                <button
-                  onClick={() => navigate("catalog")}
-                  className="hidden sm:flex items-center gap-2 text-[#FF6B1A] hover:gap-3 transition-all text-sm font-medium"
-                >
-                  Все товары <Icon name="ArrowRight" size={16} />
-                </button>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {[
-                  { name: "Молочные", emoji: "🥛", count: "45+ товаров", cat: "Молочные" },
-                  { name: "Мясо и рыба", emoji: "🍗", count: "60+ товаров", cat: "Мясо и рыба" },
-                  { name: "Фрукты и овощи", emoji: "🥦", count: "80+ товаров", cat: "Фрукты и овощи" },
-                  { name: "Напитки", emoji: "🧃", count: "70+ товаров", cat: "Напитки" },
-                  { name: "Хлеб и выпечка", emoji: "🍞", count: "30+ товаров", cat: "Хлеб и выпечка" },
-                  { name: "Бакалея", emoji: "🌾", count: "100+ товаров", cat: "Бакалея" },
-                  { name: "Заморозка", emoji: "❄️", count: "50+ товаров", cat: "Заморозка" },
-                  { name: "Все товары", emoji: "🛒", count: "500+ товаров", cat: "Все" },
-                ].map((cat, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveCategory(cat.cat);
-                      navigate("catalog");
-                    }}
-                    className="glass-card rounded-2xl p-5 text-left card-hover group"
-                  >
-                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform inline-block">{cat.emoji}</div>
-                    <div className="font-semibold text-white text-sm mb-1">{cat.name}</div>
-                    <div className="text-white/40 text-xs">{cat.count}</div>
-                  </button>
                 ))}
               </div>
             </div>
@@ -248,81 +189,6 @@ export default function Index() {
         </main>
       )}
 
-      {/* ===================== CATALOG ===================== */}
-      {activeSection === "catalog" && (
-        <main className="pt-24 pb-20 min-h-screen">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <p className="text-[#FF6B1A] text-sm uppercase tracking-widest font-medium mb-2">Ассортимент</p>
-            <h1 className="font-display text-5xl font-bold mb-8">Каталог товаров</h1>
-
-            <div className="relative mb-6">
-              <Icon name="Search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
-              <input
-                type="text"
-                placeholder="Поиск по названию..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#1A1108] border border-[#FF6B1A]/20 rounded-2xl pl-11 pr-4 py-3.5 text-white placeholder-white/30 focus:outline-none focus:border-[#FF6B1A]/60 transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                >
-                  <Icon name="X" size={16} />
-                </button>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-2 mb-10">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                    activeCategory === cat
-                      ? "gradient-bg text-white shadow-lg shadow-[#FF6B1A]/20"
-                      : "bg-[#1A1108] border border-[#FF6B1A]/15 text-white/60 hover:text-white hover:border-[#FF6B1A]/40"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            <p className="text-white/40 text-sm mb-6">
-              {filteredProducts.length === 0 ? "Ничего не найдено" : `Найдено ${filteredProducts.length} товаров`}
-            </p>
-
-            {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {filteredProducts.map((product) => (
-                  <div key={product.id} className="glass-card rounded-2xl p-5 card-hover relative overflow-hidden group">
-                    {product.badge && (
-                      <span className={`absolute top-3 right-3 text-white text-xs font-bold px-2 py-0.5 rounded-full ${
-                        product.badge === "Акция" ? "bg-[#E8293A]" : product.badge === "Хит" ? "bg-[#FF6B1A]" : "bg-[#2A8A4A]"
-                      }`}>
-                        {product.badge}
-                      </span>
-                    )}
-                    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform inline-block">{product.emoji}</div>
-                    <h3 className="font-semibold text-white text-sm mb-1 leading-tight">{product.name}</h3>
-                    <p className="text-white/30 text-xs mb-3">{product.category}</p>
-                    <div className="font-display text-xl font-bold text-[#FF6B1A]">{product.price}</div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-20">
-                <div className="text-6xl mb-4">🔍</div>
-                <p className="text-white/50 text-lg">Товар не найден</p>
-                <p className="text-white/30 text-sm mt-2">Попробуйте другое название или категорию</p>
-              </div>
-            )}
-          </div>
-        </main>
-      )}
-
       {/* ===================== ABOUT ===================== */}
       {activeSection === "about" && (
         <main className="pt-24 pb-20 min-h-screen">
@@ -339,7 +205,7 @@ export default function Index() {
                   Мы работаем для жителей микрорайона Птицефабрика и всего Якутска. Наш магазин — это место, где можно найти всё необходимое: свежие продукты, молочные изделия, мясо и рыбу, бакалею и многое другое.
                 </p>
                 <p className="text-white/60 leading-relaxed mb-8">
-                  Название «Нар» в переводе означает «гранат» — символ изобилия и щедрости. Именно так мы строим отношения с нашими покупателями — богато и по-настоящему.
+                  Название «Нар» означает «гранат» — символ изобилия и щедрости. Именно так мы строим отношения с нашими покупателями — богато и по-настоящему.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {["Свежие продукты", "Честные цены", "Удобное расположение", "Каждый день"].map((tag) => (
