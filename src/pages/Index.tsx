@@ -233,7 +233,7 @@ export default function Index() {
                 {[
                   { icon: "MapPin", title: "Адрес", lines: ["мкр. Птицефабрика, 10А", "г. Якутск, Республика Саха (Якутия)"] },
                   { icon: "Clock", title: "Режим работы", lines: ["Ежедневно: 8:00 — 23:00", "Без выходных и праздников"] },
-                  { icon: "Phone", title: "Телефон", lines: ["Уточнить по телефону"] },
+                  { icon: "Phone", title: "Телефон", lines: ["+7 (962) 732-75-12", "+7 (996) 316-57-79"] },
                 ].map((item, i) => (
                   <div key={i} className="glass-card rounded-2xl p-6 flex gap-5 card-hover">
                     <div className="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
