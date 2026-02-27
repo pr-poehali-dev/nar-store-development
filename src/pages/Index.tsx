@@ -1,14 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const PRODUCTS = [
-  { id: 1, name: "Молоко 3.2%", category: "Молочные", price: "89 ₽", emoji: "🥛", badge: "Хит" },
-  { id: 2, name: "Куриное филе", category: "Мясо и рыба", price: "320 ₽", emoji: "🍗", badge: "Свежее" },
-  { id: 4, name: "Сок апельсиновый", category: "Напитки", price: "115 ₽", emoji: "🍊", badge: "Акция" },
-  { id: 5, name: "Хлеб бородинский", category: "Хлеб и выпечка", price: "65 ₽", emoji: "🍞", badge: "Хит" },
-  { id: 11, name: "Пельмени домашние", category: "Заморозка", price: "310 ₽", emoji: "🥟", badge: "Хит" },
-  { id: 12, name: "Гречка", category: "Бакалея", price: "89 ₽", emoji: "🌾", badge: "Акция" },
-];
 
 type Section = "home" | "about" | "contacts";
 
@@ -146,27 +138,7 @@ export default function Index() {
             </div>
           </section>
 
-          <section className="py-20 bg-[#1A1108]/50">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-              <p className="text-[#FF6B1A] text-sm uppercase tracking-widest font-medium mb-2">Популярное</p>
-              <h2 className="font-display text-4xl font-bold mb-12">Товары дня</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {PRODUCTS.filter(p => p.badge).slice(0, 3).map((product) => (
-                  <div key={product.id} className="glass-card rounded-2xl p-6 card-hover relative overflow-hidden">
-                    {product.badge && (
-                      <span className="absolute top-4 right-4 bg-[#FF6B1A] text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                        {product.badge}
-                      </span>
-                    )}
-                    <div className="text-5xl mb-4 animate-float">{product.emoji}</div>
-                    <h3 className="font-semibold text-white text-lg mb-1">{product.name}</h3>
-                    <p className="text-white/40 text-sm mb-4">{product.category}</p>
-                    <div className="font-display text-2xl font-bold text-[#FF6B1A]">{product.price}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+
 
           <section className="py-20">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
